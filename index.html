@@ -3,11 +3,1122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAIZZOL Energy Innovation</title>
+    <title>KAIZZOL | Energy Innovation</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fredoka:wght@700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --warm-orange: #ea580c; 
+            --warm-orange-light: #f9716;
+            --sun-yellow: #fde047; 
+            --logo-red: #FF0000;
+            --logo-red-dark: #c1121f; 
+            --logo-yellow: #FFCC00;
+            --logo-white-outline: #FFFFFF;
+            --off-white: #fffbeb;
+            --dark-text: #1c1917;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+            /* Base background, visible on scroll bounce */
+            background-color: var(--warm-orange); 
+            color: white;
+            font-weight: 400;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, .display-font, .neo-button-dark, .outline-button, .outline-button-hero {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+        
+        p {
+            @apply text-base md:text-lg font-bold leading-relaxed;
+        }
+        
+        /* --- LOGO (REAL IMAGE) --- */
+        .logo-image-header { /* NEW: Specific class for header logo */
+            height: 4rem; /* 64px - Reduced from 80px */
+            width: auto;
+            image-rendering: pixelated;
+            image-rendering: -webkit-optimize-contrast;
+            /* Bubbly pulse animation */
+            animation: bubbly-pulse 4s ease-in-out infinite;
+        }
+
+        /* --- HERO TEXT (Polished Solid Shadow) --- */
+        .hero-text, .hero-subtext {
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- TEXTURE / GRAIN --- */
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000; 
+            mix-blend-mode: overlay;
+        }
+
+        /* --- SECTIONS --- */
+        .bg-sun-gradient {
+            /* "Flowy" diagonal gradient from v4 */
+            background: linear-gradient(135deg, #C44F31 0%, #FAE68B 100%);
+        }
+        .bg-cream {
+            background-color: var(--off-white);
+            color: var(--dark-text);
+        }
+
+        /* --- NAVIGATION (Polished & Responsive) --- */
+        nav {
+            background-color: rgba(255, 251, 235, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+        #mobile-menu {
+            background-color: var(--sun-yellow);
+            color: var(--logo-red);
+        }
+        
+        /* --- NEO-BRUTALIST ELEMENTS (Playful/Bubbly) --- */
+        .neo-shadow-dark {
+            box-shadow: 6px 6px 0px var(--dark-text);
+            border: 3px solid var(--dark-text);
+            @apply rounded-xl; /* Bubbly corners */
+        }
+        
+        /* Playful card tilt hover */
+        .tilting-card-left {
+            @apply transform -rotate-1 transition-transform duration-300;
+        }
+        .tilting-card-left:hover {
+            @apply rotate-1;
+        }
+        
+        .tilting-card-right {
+            @apply transform rotate-1 transition-transform duration-300;
+        }
+        .tilting-card-right:hover {
+            @apply -rotate-1;
+        }
+
+
+        .neo-card-light {
+             background-color: rgba(0, 0, 0, 0.3);
+             backdrop-filter: blur(5px);
+             border: 3px solid rgba(255, 255, 255, 0.5);
+             box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
+             @apply rounded-xl; /* Bubbly corners */
+        }
+
+        /* Hero button style */
+        .outline-button-hero {
+            @apply inline-block px-10 py-3 rounded-full font-bold transition-all duration-300;
+            background-color: transparent;
+            border: 2px solid var(--logo-red);
+            color: var(--logo-red);
+            text-shadow: none;
+            font-size: 1.25rem;
+        }
+        /* Playful hover */
+        .outline-button-hero:hover {
+            background-color: var(--logo-red);
+            color: var(--logo-white-outline);
+            transform: scale(1.03) translate(-4px, -4px);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+        }
+        .outline-button-hero:active {
+            transform: scale(1.0) translate(0, 0);
+            box-shadow: 0 0 0 rgba(0,0,0,0.2);
+        }
+
+
+        /* Bubbly/Playful Button */
+        .outline-button {
+            @apply inline-block px-10 py-4 rounded-full font-bold transition-all duration-150;
+            background-color: var(--logo-white-outline);
+            border: 3px solid var(--dark-text);
+            color: var(--logo-red);
+            text-shadow: none;
+            box-shadow: 4px 4px 0px var(--dark-text);
+            font-size: 1.25rem;
+        }
+        /* Playful hover */
+        .outline-button:hover {
+            box-shadow: 8px 8px 0px var(--dark-text);
+            transform: translate(-4px, -4px);
+        }
+        .outline-button:active {
+            box-shadow: 0 0 0 var(--dark-text);
+            transform: translate(4px, 4px);
+        }
+        
+        /* Bubbly/Playful Button */
+        .neo-button-dark {
+             @apply w-full rounded-full transition-all duration-150;
+            background-color: var(--dark-text);
+            color: var(--off-white);
+            border: 3px solid var(--dark-text);
+            box-shadow: 4px 4px 0px var(--warm-orange);
+            font-size: 1.25rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        /* Playful hover */
+        .neo-button-dark:hover {
+             box-shadow: 8px 8px 0px var(--warm-orange);
+             transform: translate(-4px, -4px);
+             background-color: var(--logo-red);
+             color: var(--off-white);
+             border-color: var(--logo-red);
+        }
+        .neo-button-dark:active {
+             box-shadow: 0 0 0 var(--warm-orange);
+             transform: translate(4px, 4px);
+        }
+        
+        /* Bubbly Form */
+        .form-input-bubbly {
+            @apply w-full p-4 bg-white border-2 border-dark-text rounded-full focus:outline-none focus:border-logo-red text-dark-text font-bold placeholder-gray-400;
+            box-shadow: 4px 4px 0px var(--dark-text);
+        }
+        /* Bubbly Select */
+        .form-select-bubbly {
+            @apply w-full p-4 bg-white border-2 border-dark-text rounded-full focus:outline-none focus:border-logo-red text-dark-text font-bold;
+            box-shadow: 4px 4px 0px var(--dark-text);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231c1917' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
+        }
+        
+        /* Bubbly Form (Textarea) */
+        .form-textarea-bubbly {
+            @apply w-full p-4 bg-white border-2 border-dark-text rounded-2xl focus:outline-none focus:border-logo-red text-dark-text font-bold placeholder-gray-400;
+            box-shadow: 4px 4px 0px var(--dark-text);
+        }
+
+
+        /* --- LANGUAGE SWITCHER --- */
+        .lang-button {
+            @apply font-bold text-sm uppercase px-3 py-1 rounded-full;
+            color: rgba(255, 255, 255, 0.4);
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+        .lang-button:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .lang-button.active {
+            color: var(--dark-text);
+            background-color: var(--off-white);
+        }
+
+        /* --- ANIMATION --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Bubbly Logo Pulse */
+        @keyframes bubbly-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+        
+        /* --- NEW STATIC AI PLATFORM SVG (V20) --- */
+        .ai-platform-svg-simple {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: visible;
+        }
+        .ai-platform-svg-simple .icon-group {
+            stroke-width: 2;
+            stroke: var(--dark-text);
+            fill: none;
+        }
+        .ai-platform-svg-simple .icon-fill {
+            fill: var(--dark-text);
+            stroke: none;
+        }
+        .ai-platform-svg-simple .brain-icon {
+            /* This class is now used for the THUNDERBOLT icon */
+            stroke: var(--logo-red);
+            fill: var(--logo-red);
+            animation: bubbly-pulse 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+        .ai-platform-svg-simple .line {
+            stroke: var(--dark-text);
+            stroke-width: 3;
+            stroke-dasharray: 8 6;
+            animation: nerve-flow 3s linear infinite;
+        }
+
+        /* NEW: Added labels for the new diagram */
+        .ai-platform-svg-simple .label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            fill: var(--dark-text);
+            font-weight: 700;
+            text-anchor: middle;
+        }
+        
+        @keyframes nerve-flow {
+            from { stroke-dashoffset: 14; }
+            to { stroke-dashoffset: 0; }
+        }
+
+    </style>
 </head>
 <body>
-    <h1>KAIZZOL - Energy Innovation</h1>
-    <p>Welcome to KAIZZOL Energy Platform</p>
+    
+    <div class="grain-overlay"></div>
+
+    <!-- HEADER UPDATED: Added md:px-16 for more space -->
+    <nav class="fixed top-0 w-full z-50 h-24 flex items-center justify-between px-6 md:px-16 transition-all duration-300">
+        
+        <a href="#" onclick="showSection('home')" class="z-50">
+            <!-- LOGO UPDATED: Changed class to logo-image-header for specific sizing -->
+            <img src="https://i.postimg.cc/CxTpkwh3/logo4-kaizzol.png" alt="Kaizzol Logo" class="logo-image-header">
+        </a>
+
+        <!-- MENU UPDATED: Removed "Community" button -->
+        <div class="hidden md:flex items-center gap-6 font-bold text-sm uppercase">
+            <button data-translate="navMission" onclick="showSection('home')" class="hover:text-logo-red-dark transition-colors" style="color: var(--logo-red);">Mission</button>
+            <button data-translate="navTechnology" onclick="showSection('technology')" class="hover:text-logo-red-dark transition-colors" style="color: var(--logo-red);">Technology</button>
+            <button data-translate="navSolutions" onclick="showSection('solutions')" class="hover:text-logo-red-dark transition-colors" style="color: var(--logo-red);">Solutions</button>
+            <button data-translate="navCalculator" onclick="showSection('calculator')" class="hover:text-logo-red-dark transition-colors" style="color: var(--logo-red);">Savings Calculator</button>
+            <button data-translate="navConnect" onclick="showSection('contact')" class="hover:text-logo-red-dark transition-colors" style="color: var(--logo-red);">Connect</button>
+        </div>
+
+        <button onclick="toggleMenu()" class="z-50 flex flex-col gap-1.5 md:hidden">
+            <div class="w-8 h-1 rounded-full transition-all duration-300" id="bar1" style="background-color: var(--logo-red);"></div>
+            <div class="w-8 h-1 rounded-full transition-all duration-300" id="bar2" style="background-color: var(--logo-red);"></div>
+        </button>
+    </nav>
+
+    
+    <!-- MOBILE MENU UPDATED: Removed "Community" button -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 transform translate-y-[-100%] transition-transform duration-500 flex flex-col items-center justify-center gap-8 md:hidden">
+        <button data-translate="navMission" onclick="showSection('home'); toggleMenu()" class="display-font text-4xl hover:scale-110 transition-transform">Mission</button>
+        <button data-translate="navTechnology" onclick="showSection('technology'); toggleMenu()" class="display-font text-4xl hover:scale-110 transition-transform">Technology</button>
+        <button data-translate="navSolutions" onclick="showSection('solutions'); toggleMenu()" class="display-font text-4xl hover:scale-110 transition-transform">Solutions</button>
+        <button data-translate="navCalculator" onclick="showSection('calculator'); toggleMenu()" class="display-font text-4xl hover:scale-110 transition-transform">Savings Calculator</button>
+        <button data-translate="navConnect" onclick="showSection('contact'); toggleMenu()" class="display-font text-4xl hover:scale-110 transition-transform">Connect</button>
+    </div>
+
+    
+    <main class="relative z-10 pt-24">
+
+        
+        <section id="home" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-sun-gradient overflow-hidden">
+            <div class="max-w-5xl mx-auto w-full reveal text-left">
+                <h1 data-translate="heroTitle" class="text-5xl md:text-7xl lg:text-8xl mb-8 text-white hero-text">
+                    WE'RE REWRITING<br>
+                    THE RULES OF ENERGY<br>
+                    IN THE MEDITERRANEAN.
+                </h1>
+                
+                <!-- Hero Copy (v21) -->
+                <p data-translate="heroSubtitle" class="text-lg md:text-xl font-bold max-w-3xl mb-12 leading-relaxed hero-subtext text-white">
+                    <!-- UPDATED TEXT: Changed "Agentic AI energy platform" to "KAIZZOL harmony - OS platform" -->
+                    The Mediterranean has amazing food, incredible people, and an abundant sun. Unfortunately, that solar value is often lost, as the sun doesn't shine 24/7. Kaizzol solves this with our KAIZZOL harmony - OS platform, orchestrating a smart, living network of distributed energy assets to create a reliable, harmonious flow for the whole community.
+                </p>
+                <div class="flex flex-col md:flex-row justify-start gap-6">
+                    <!-- Button still links to community section, even though it's not in nav -->
+                    <button data-translate="heroButton" onclick="showSection('community')" class="outline-button-hero text-lg">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="technology" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-cream">
+            <div class="max-w-6xl mx-auto">
+                
+                <div class="text-center mb-16 reveal">
+                    <h2 data-translate="techTitle" class="text-4xl md:text-7xl mb-6 text-dark-text">THE GRID IS A LIVING ORGANISM.<br>AI IS THE NERVOUS SYSTEM.</h2>
+                    <p data-translate="techSubtitle" class="text-md md:text-lg text-gray-700 max-w-3xl mx-auto">
+                        Traditional power plants are rigid. Our Virtual Power Plant is fluid. Our Agentic AI energy platform is the 'smart brain' at its center, learning, predicting, and coordinating—harmonizing thousands of Distributed Energy Assets (DERs) like solar, batteries, EVs, and smart HVACs.
+                    </p>
+                    <p data-translate="techFlexibility" class="text-md md:text-lg text-gray-700 max-w-3xl mx-auto mt-4">
+                        This creates **flexibility**. For grid operators and municipalities, it's a new source of stability. For end-users, it unlocks value and lowers costs. It's an intelligent network that breathes *with* the grid, ensuring harmony for everyone.
+                    </p>
+                </div>
+
+                <!--
+                NEW AI NERVOUS SYSTEM DIAGRAM
+                This is a new, static SVG that shows the AI at the center of the network,
+                which is much clearer and less confusing.
+                -->
+                <div class="w-full my-12 md:my-20 reveal">
+                    <svg class="ai-platform-svg-simple" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                        <!-- Lucide Icons Definitions -->
+                        <defs>
+                            <g id="icon-grid" class="icon-group">
+                                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                            </g>
+                            <!-- UPDATED: Replaced Brain with Thunderbolt (Zap) icon -->
+                            <g id="icon-ai-core" class="brain-icon">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </g>
+                            <g id="icon-home" class="icon-fill">
+                                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </g>
+                            <g id="icon-factory" class="icon-fill">
+                                <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7-6H4a2 2 0 0 0-2 2Z"></path><path d="M17 18h1"></path><path d="M12 18h1"></path><path d="M7 18h1"></path>
+                            </g>
+                            <g id="icon-solar" class="icon-fill">
+                                <path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="m10 16 4-4"></path><path d="m10 12 4-4"></path><path d="m14 12 4 4"></path>
+                            </g>
+                            <g id="icon-battery" class="icon-fill">
+                                <path d="M15 7h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1Z"></path><path d="M6 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="m11 7-3 5h4l-3 5"></path>
+                            </g>
+                            <g id="icon-ev" class="icon-fill">
+                                <path d="M14 17H8v-3.5a2.5 2.5 0 0 1 5 0V17Z"></path><path d="M12 17H3.6a.6.6 0 0 1-.6-.6v-6.8a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v6.8a.6.6 0 0 1-.6.6H18"></path><circle cx="6" cy="17" r="2"></circle><circle cx="18" cy="17" r="2"></circle>
+                            </g>
+                        </defs>
+
+                        <!-- Center: KAIZZOL AI -->
+                        <!-- UPDATED: Using new #icon-ai-core -->
+                        <use xlink:href="#icon-ai-core" x="188" y="88" width="24" height="24" />
+                        <text x="200" y="120" class="label" style="fill: var(--logo-red);">KAIZZOL AI</text>
+
+                        <!-- Surrounding Assets -->
+                        <!-- GRID (Top-Left) -->
+                        <use xlink:href="#icon-grid" x="100" y="40" width="24" height="24" />
+                        <text x="112" y="72" class="label">GRID</text>
+                        <path class="line" d="M 194 94 L 118 60" />
+
+                        <!-- HOMES (Top-Right) -->
+                        <use xlink:href="#icon-home" x="276" y="40" width="24" height="24" />
+                        <text x="288" y="72" class="label">HOMES</text>
+                        <path class="line" d="M 206 94 L 282 60" />
+                        
+                        <!-- INDUSTRY (Right) -->
+                        <use xlink:href="#icon-factory" x="320" y="88" width="24" height="24" />
+                        <text x="332" y="120" class="label">INDUSTRY</text>
+                        <path class="line" d="M 212 100 L 320 100" />
+
+                        <!-- EVs (Bottom-Right) -->
+                        <use xlink:href="#icon-ev" x="276" y="136" width="24" height="24" />
+                        <text x="288" y="168" class="label">EVs</text>
+                        <path class="line" d="M 206 106 L 282 140" />
+                        
+                        <!-- BATTERIES (Bottom-Left) -->
+                        <use xlink:href="#icon-battery" x="100" y="136" width="24" height="24" />
+                        <text x="112" y="168" class="label">BATTERIES</text>
+                        <path class="line" d="M 194 106 L 118 140" />
+
+                        <!-- SOLAR (Left) -->
+                        <use xlink:href="#icon-solar" x="56" y="88" width="24" height="24" />
+                        <text x="68" y="120" class="label">SOLAR</text>
+                        <path class="line" d="M 188 100 L 80 100" />
+                    </svg>
+                </div>
+
+
+                <!-- Reverted to 3-card layout -->
+                <div class="grid md:grid-cols-3 gap-8 mt-16">
+                    <div class="bg-white p-8 reveal neo-shadow-dark tilting-card-left">
+                        <div class="mb-6 text-logo-red"><i data-lucide="brain-circuit" class="w-12 h-12"></i></div>
+                        <h3 data-translate="techPillar1Title" class="text-2xl mb-4 text-logo-red">PREDICTIVE INTUITION</h3>
+                        <p data-translate="techPillar1Text" class="text-gray-600">
+                            Our platform doesn't just react; it anticipates. It senses weather patterns, grid stress, and community demand before they happen.
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 reveal neo-shadow-dark tilting-card-right" style="transition-delay: 100ms">
+                        <div class="mb-6 text-logo-red"><i data-lucide="zap" class="w-12 h-12"></i></div>
+                        <h3 data-translate="techPillar2Title" class="text-2xl mb-4 text-logo-red">REAL-TIME HARMONY</h3>
+                        <p data-translate="techPillar2Text" class="text-gray-600">
+                            We balance supply and demand in milliseconds. When the sun dips, our network steps in—a symphony of distributed assets keeping the community bright.
+                        </D>
+                    </div>
+                    <div class="bg-white p-8 reveal neo-shadow-dark tilting-card-left" style="transition-delay: 200ms">
+                        <div class="mb-6 text-logo-red"><i data-lucide="network" class="w-12 h-12"></i></div>
+                        <h3 data-translate="techPillar3Title" class="text-2xl mb-4 text-logo-red">DECENTRALIZED STRENGTH</h3>
+                        <p data-translate="techPillar3Text" class="text-gray-600">
+                            No single point of failure. By connecting thousands of small assets, we build a resilient mesh. A grid *by* the people, *for* the people.
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="solutions" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-cream">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <!-- TONE CHANGE V9 -->
+                    <h2 data-translate="solutionsTitle" class="text-4xl md:text-7xl mb-6 text-dark-text">SOLUTIONS FOR THE FUTURE</h2>
+                    <p data-translate="solutionsSubtitle" class="text-md md:text-lg text-gray-700 max-w-3xl mx-auto">
+                        We provide tangible benefits for the two pillars of the Mediterranean: its communities and its industries.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 reveal neo-shadow-dark tilting-card-right">
+                        <div class="mb-6 text-logo-red"><i data-lucide="users" class="w-12 h-12"></i></div>
+                        <h3 data-translate="solutionsPillar1Title" class="text-3xl mb-6 text-logo-red">FOR COMMUNITIES</h3>
+                        <p data-translate="solutionsPillar1Text" class="text-gray-600 mb-6">
+                            Our social model is our core strategy. We partner with local cooperatives and landowners, sharing revenue to create lasting prosperity and revitalized rural regions.
+                        </p>
+                        <ul class="space-y-3 font-bold text-gray-700">
+                            <li class="flex items-center"><i data-lucide="dollar-sign" class="w-5 h-5 mr-3 text-logo-red"></i><span data-translate="solutionsPillar1Point1">Share in energy revenue</span></li>
+                            <li class="flex items-center"><i data-lucide="trending-up" class="w-5 h-5 mr-3 text-logo-red"></i><span data-translate="solutionsPillar1Point2">Fund local projects</span></li>
+                            <li class="flex items-center"><i data-lucide="leaf" class="w-5 h-5 mr-3 text-logo-red"></i><span data-translate="solutionsPillar1Point3">Fight depopulation</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-8 reveal neo-shadow-dark tilting-card-left" style="transition-delay: 100ms">
+                        <div class="mb-6 text-logo-red"><i data-lucide="building" class="w-12 h-12"></i></div>
+                        <h3 data-translate="solutionsPillar2Title" class="text-3xl mb-6 text-logo-red">FOR BUSINESSES</h3>
+                        <!-- NEW "Distributed Energy Assets" COPY (V14) -->
+                        <p data-translate="solutionsPillar2Text" class="text-gray-600 mb-6">
+                            For C&I facilities and municipalities, our AI platform manages Distributed Energy Assets (DERs) (like solar, batteries, and EVs) to cut energy costs, generate new revenue from grid services, and ensure power stability.
+                        </D>
+                        <ul class="space-y-3 font-bold text-gray-700">
+                            <li class="flex items-center"><i data-lucide="shield" class="w-5 h-5 mr-3 text-logo-red"></i><span data-translate="solutionsPillar2Point1">Hedge against price spikes</span></li>
+                            <li class="flex items-center"><i data-lucide="arrow-down-left" class="w-5 h-5 mr-3 text-logo-red"></i><span data-translate="solutionsPillar2Point2">Drastically reduce energy bills</span></li>
+                            <li class="flex items-center"><i data-lucide="activity" class="w-5 h-5 mr-3 text-logo-red"></i><span data-translate="solutionsPillar2Point3">Earn from grid stabilization</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-cream">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <!-- TONE CHANGE V9 -->
+                    <h2 data-translate="calculatorTitle" class="text-4xl md:text-7xl mb-6 text-dark-text">WHAT'S YOUR POTENTIAL?</h2>
+                    <p data-translate="calculatorSubtitle" class="text-md md:text-lg text-gray-700 max-w-3xl mx-auto">
+                        <!-- TONE CHANGE V9 -->
+                        Use our Savings Calculator to see your potential. Our AI platform will analyze your location, roof, and energy use to show you the power you could unlock.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 reveal neo-shadow-dark tilting-card-right">
+                        <h3 data-translate="calculatorFormTitle" class="text-3xl mb-6 text-logo-red">CALCULATE YOUR SAVINGS</h3>
+                        <form id="calc-form" class="space-y-6">
+                            <div>
+                                <label data-translate="formLocation" class="font-bold text-dark-text" for="location">Location (City, Country)</label>
+                                <input id="location" type="text" placeholder="e.g., Palermo, Italy" class="form-input-bubbly mt-2">
+                            </div>
+                            
+                            <div>
+                                <label data-translate="formBill" class="font-bold text-dark-text" for="bill">Average Monthly Bill (€)</label>
+                                <input id="bill" type="number" placeholder="e.g., 150" class="form-input-bubbly mt-2">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label data-translate="formProperty" class="font-bold text-dark-text" for="property-type">Property Type</label>
+                                    <select id="property-type" class="form-select-bubbly mt-2">
+                                        <option value="Home">Home</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Cooperative">Cooperative</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label data-translate="formRoof" class="font-bold text-dark-text" for="roof-type">Roof Type</label>
+                                    <select id="roof-type" class="form-select-bubbly mt-2">
+                                        <option value="Flat">Flat</option>
+                                        <option value="Pitched">Pitched</option>
+                                        <option value="Complex">Complex</option>
+                                        <option value="No Roof (Land)">No Roof (Land)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button id="calc-button" type="button" class="neo-button-dark text-xl py-4">
+                                <span data-translate="formButtonAnalyze">Analyze Now</span>
+                                <span id="calc-loading" class="hidden">Analyzing...</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="calc-results-container" class="bg-white p-8 reveal neo-shadow-dark tilting-card-left hidden" style="transition-delay: 100ms">
+                        <!-- TONE CHANGE V9 -->
+                        <h3 data-translate="calculatorResultTitle" class="text-3xl mb-6 text-logo-red">YOUR AI ANALYSIS</h3>
+                        
+                        <div id="calc-results-loading" class="text-center py-10">
+                            <div class="w-12 h-12 border-4 border-logo-red border-t-transparent rounded-full animate-spin mx-auto"></div>
+                            <!-- TONE CHANGE V9 -->
+                            <p data-translate="calculatorLoading" class="font-bold mt-4 text-gray-600">Our AI platform is analyzing your potential...</p>
+                        </div>
+
+                        <div id="calc-results-content" class="hidden">
+                            <p data-translate="calculatorResultSubtitle" class="font-bold text-gray-600 text-lg">Potential Monthly Savings:</p>
+                            <div id="calc-savings" class="display-font text-7xl text-dark-text my-4">€0</div>
+                            
+                            <h4 data-translate="calculatorResultAnalysis" class="font-bold text-lg text-dark-text mt-8 mb-2">Analysis:</h4>
+                            <p id="calc-analysis" class="text-gray-600 mb-6">...</p>
+                            
+                            <h4 data-translate="calculatorResultNext" class="font-bold text-lg text-dark-text mt-8 mb-2">Next Step:</h4>
+                            <p id="calc-next-step" class="text-gray-600">...</p>
+                        </div>
+
+                        <div id="calc-results-error" class="hidden">
+                            <h4 data-translate="calculatorErrorTitle" class="text-3xl text-logo-red mb-4">Analysis Failed</h4>
+                            <p data-translate="calculatorErrorText" class="text-gray-600 mb-6">Our AI platform couldn't complete the analysis. This might be due to a temporary connection issue. Please try again in a moment.</p>
+                            <button id="calc-try-again" type="button" class="outline-button text-lg">
+                                <span data-translate="calculatorErrorButton">Try Again</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        
+        <section id="community" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-sun-gradient overflow-hidden">
+            
+            <div class="marquee bg-white text-logo-red py-4 border-y-4 border-dark-text -rotate-2 scale-110 mb-16 shadow-2xl">
+                <span class="display-font text-2xl">
+                    <span data-translate="footerTagline">Energy in Harmony</span> • 
+                    <span data-translate="communityTag">Energy Democracy</span> • 
+                    <span data-translate="footerTagline">Energy in Harmony</span> • 
+                    <span data-translate="communityTag">Energy Democracy</span> • 
+                    <span data-translate="footerTagline">Energy in Harmony</span> • 
+                    <span data-translate="communityTag">Energy Democracy</span> • 
+                    <span data-translate="footerTagline">Energy in Harmony</span> • 
+                    <span data-translate="communityTag">Energy Democracy</span> • 
+                </span>
+            </div>
+            
+            <div class="max-w-5xl mx-auto text-center reveal">
+                <span data-translate="communityTag" class="bg-white text-logo-red px-4 py-1 rounded-full font-bold text-xs uppercase tracking-widest mb-6 inline-block">Energy Democracy</span>
+                <h2 data-translate="communityTitle" class="text-4xl md:text-7xl mb-8 text-white hero-text">POWER BELONGS TO<br>THE PEOPLE WHO USE IT.</h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 mt-16 text-left">
+                    <div class="p-8 reveal neo-card-light">
+                        <h3 data-translate="communityPillar1Title" class="text-2xl text-logo-red mb-4">FROM CONSUMERS TO OWNERS</h3>
+                        <p data-translate="communityPillar1Text" class="text-white">
+                            <!-- TONE CHANGE V9 -->
+                            For a century, energy has been a one-way street. We are creating a new, circular path. We partner with local cooperatives, sharing our success directly with the communities that host our infrastructure.
+                        </p>
+                    </div>
+                    <div class="p-8 reveal neo-card-light" style="transition-delay: 100ms">
+                        <h3 data-translate="communityPillar2Title" class="text-2xl text-logo-red mb-4">REVITALIZING RURAL LIFE</h3>
+                        <p data-translate="communityPillar2Text" class="text-white">
+                            Energy infrastructure shouldn't extract value; it should pour value back in. Our model creates new economic engines in Mediterranean villages, fighting depopulation with innovation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        
+        <section id="contact" class="min-h-[80vh] flex flex-col justify-center items-center px-6 py-20 bg-cream text-center">
+            <div class="max-w-lg mx-auto w-full reveal">
+                <h2 data-translate="contactTitle" class="text-5xl md:text-8xl text-dark-text mb-8">JOIN THE MOVEMENT</h2>
+                <p data-translate="contactSubtitle" class="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                    <!-- TONE CHANGE V9: Removed Q1 2026, added "municipality" -->
+                    We are deploying in Spain and Italy. Whether you are a cooperative, a landowner, a municipality, or a visionary investor—let's build the future together.
+                </p>
+                
+                <form class="w-full text-left space-y-6">
+                    <input data-translate-placeholder="formEmail" type="email" placeholder="Your Email Address" class="form-input-bubbly">
+                    <textarea data-translate-placeholder="formMessage" placeholder="How do you want to contribute?" rows="3" class="form-textarea-bubbly"></textarea>
+                    <button data-translate="formButton" type="button" class="neo-button-dark text-xl py-4">
+                        Let's Talk
+                    </button>
+                </form>
+            </div>
+        </section>
+        
+        
+        <footer class="bg-dark-text text-white/60 py-12 text-center border-t border-white/10">
+            <div class="flex justify-center gap-2 mb-6">
+                <button id="lang-en" class="lang-button active" onclick="changeLanguage('en')">EN</button>
+                <button id="lang-es" class="lang-button" onclick="changeLanguage('es')">ES</button>
+                <button id="lang-it" class="lang-button" onclick="changeLanguage('it')">IT</button>
+            </div>
+            <p data-translate="footerLocations" class="font-bold text-sm">© 2025 KAIZZOL. Copenhagen • Rome • Barcelona</p>
+            <p data-translate="footerTagline" class="text-xs mt-2">Energy in Harmony.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Note: lucide.createIcons() is called in DOMContentLoaded
+        
+        // --- TRANSLATION SCRIPT ---
+        
+        const translations = {
+            'en': {
+                navMission: "Mission",
+                navTechnology: "Technology",
+                navSolutions: "Solutions",
+                navCalculator: "Savings Calculator",
+                navConnect: "Connect",
+                heroTitle: "WE'RE REWRITING<br>THE RULES OF ENERGY<br>IN THE MEDITERRANEAN.",
+                // UPDATED TEXT: Changed "Agentic AI energy platform" to "KAIZZOL harmony - OS platform"
+                heroSubtitle: "The Mediterranean has amazing food, incredible people, and an abundant sun. Unfortunately, that solar value is often lost, as the sun doesn't shine 24/7. Kaizzol solves this with our KAIZZOL harmony - OS platform, orchestrating a smart, living network of distributed energy assets to create a reliable, harmonious flow for the whole community.",
+                heroButton: "Learn More",
+                techTitle: "THE GRID IS A LIVING ORGANISM.&lt;br&gt;AI IS THE NERVOUS SYSTEM.",
+                techSubtitle: "Traditional power plants are rigid. Our Virtual Power Plant is fluid. Our Agentic AI energy platform is the 'smart brain' at its center, learning, predicting, and coordinating—harmonizing thousands of Distributed Energy Assets (DERs) like solar, batteries, EVs, and smart HVACs.",
+                techFlexibility: "This creates **flexibility**. For grid operators and municipalities, it's a new source of stability. For end-users, it unlocks value and lowers costs. It's an intelligent network that breathes *with* the grid, ensuring harmony for everyone.",
+                techPillar1Title: "PREDICTIVE INTUITION",
+                techPillar1Text: "Our platform doesn't just react; it anticipates. It senses weather patterns, grid stress, and community demand before they happen.",
+                techPillar2Title: "REAL-TIME HARMONY",
+                techPillar2Text: "We balance supply and demand in milliseconds. When the sun dips, our network steps in—a symphony of distributed assets keeping the community bright.",
+                techPillar3Title: "DECENTRALIZED STRENGTH",
+                techPillar3Text: "No single point of failure. By connecting thousands of small assets, we build a resilient mesh. A grid *by* the people, *for* the people.",
+                solutionsTitle: "SOLUTIONS FOR THE FUTURE",
+                solutionsSubtitle: "We provide tangible benefits for the two pillars of the Mediterranean: its communities and its industries.",
+                solutionsPillar1Title: "FOR COMMUNITIES",
+                solutionsPillar1Text: "Our social model is our core strategy. We partner with local cooperatives and landowners, sharing revenue to create lasting prosperity and revitalized rural regions.",
+                solutionsPillar1Point1: "Share in energy revenue",
+                solutionsPillar1Point2: "Fund local projects",
+                solutionsPillar1Point3: "Fight depopulation",
+                solutionsPillar2Title: "FOR BUSINESSES",
+                solutionsPillar2Text: "For C&amp;I facilities and municipalities, our AI platform manages Distributed Energy Assets (DERs) (like solar, batteries, and EVs) to cut energy costs, generate new revenue from grid services, and ensure power stability.",
+                solutionsPillar2Point1: "Hedge against price spikes",
+                solutionsPillar2Point2: "Drastically reduce energy bills",
+                solutionsPillar2Point3: "Earn from grid stabilization",
+                calculatorTitle: "WHAT'S YOUR POTENTIAL?",
+                calculatorSubtitle: "Use our Savings Calculator to see your potential. Our AI platform will analyze your location, roof, and energy use to show you the power you could unlock.",
+                calculatorFormTitle: "CALCULATE YOUR SAVINGS",
+                formLocation: "Location (City, Country)",
+                formBill: "Average Monthly Bill (€)",
+                formProperty: "Property Type",
+                formRoof: "Roof Type",
+                formButtonAnalyze: "Analyze Now",
+                calculatorResultTitle: "YOUR AI ANALYSIS",
+                calculatorLoading: "Our AI platform is analyzing your potential...",
+                calculatorResultSubtitle: "Potential Monthly Savings:",
+                calculatorResultAnalysis: "Analysis:",
+                calculatorResultNext: "Next Step:",
+                calculatorErrorTitle: "Analysis Failed",
+                calculatorErrorText: "Our AI platform couldn't complete the analysis. This might be due to a temporary connection issue. Please try again in a moment.",
+                calculatorErrorButton: "Try Again",
+                communityTag: "Energy Democracy",
+                communityTitle: "POWER BELONGS TO&lt;br&gt;THE PEOPLE WHO USE IT.",
+                communityPillar1Title: "FROM CONSUMERS TO OWNERS",
+                communityPillar1Text: "For a century, energy has been a one-way street. We are creating a new, circular path. We partner with local cooperatives, sharing our success directly with the communities that host our infrastructure.",
+                communityPillar2Title: "REVITALIZING RURAL LIFE",
+                communityPillar2Text: "Energy infrastructure shouldn't extract value; it should pour value back in. Our model creates new economic engines in Mediterranean villages, fighting depopulation with innovation.",
+                contactTitle: "JOIN THE MOVEMENT",
+                contactSubtitle: "We are deploying in Spain and Italy. Whether you are a cooperative, a landowner, a municipality, or a visionary investor—let's build the future together.",
+                formEmail: "Your Email Address",
+                formMessage: "How do you want to contribute?",
+                formButton: "Let's Talk",
+                footerLocations: "© 2025 KAIZZOL. Copenhagen • Rome • Barcelona",
+                footerTagline: "Energy in Harmony.",
+            },
+            'es': {
+                navMission: "Misión",
+                navTechnology: "Tecnología",
+                navSolutions: "Soluciones",
+                navCalculator: "Calculadora de Ahorros",
+                navConnect: "Conectar",
+                heroTitle: "ESTAMOS REESCRIBIENDO&lt;br&gt;LAS REGLAS DE LA ENERGÍA&lt;br&gt;EN EL MEDITERRÁNEO.",
+                heroSubtitle: "El Mediterráneo tiene comida increíble, gente maravillosa y un sol abundante. Desafortunadamente, ese valor solar a menudo se pierde, ya que el sol no brilla 24/7. Kaizzol lo resuelve con nuestra plataforma Agéntica de energía IA, orquestando una red inteligente y viva de activos energéticos distribuidos para crear un flujo fiable y armonioso para toda la comunidad.",
+                heroButton: "Saber Más",
+                techTitle: "LA RED ES UN ORGANISMO VIVO.&lt;br&gt;LA IA ES EL SISTEMA NERVIOSO.",
+                techSubtitle: "Las centrales eléctricas tradicionales son rígidas. Nuestra Central Eléctrica Virtual es fluida. Nuestra plataforma Agéntica de energía IA es el 'cerebro inteligente' en su centro, aprendiendo, prediciendo y coordinando, armonizando miles de Activos Energéticos Distribuidos (DERs) como solar, baterías, VEs y climatización inteligente.",
+                techFlexibility: "Esto crea **flexibilidad**. Para los operadores de red y municipios, es una nueva fuente de estabilidad. Para los usuarios finales, desbloquea valor y reduce costos. Es una red inteligente que respira *con* la red, asegurando la armonía para todos.",
+                techPillar1Title: "INTUICIÓN PREDICTIVA",
+                techPillar1Text: "Nuestra plataforma no solo reacciona; se anticipa. Detecta patrones climáticos, estrés de la red y demanda de la comunidad antes de que sucedan.",
+                techPillar2Title: "ARMONÍA EN TIEMPO REAL",
+                techPillar2Text: "Equilibramos la oferta y la demanda en milisegundos. Cuando el sol se oculta, nuestra red interviene: una sinfonía de activos distribuidos que mantiene brillante a la comunidad.",
+                techPillar3Title: "FUERZA DESCENTRALIZADA",
+                techPillar3Text: "Sin punto único de fallo. Al conectar miles de pequeños activos, construimos una malla resiliente. Una red *de* la gente, *para* la gente.",
+                solutionsTitle: "SOLUCIONES PARA EL FUTURO",
+                solutionsSubtitle: "Ofrecemos beneficios tangibles para los dos pilares del Mediterráneo: sus comunidades y sus industrias.",
+                solutionsPillar1Title: "PARA COMUNIDADES",
+                solutionsPillar1Text: "Nuestro modelo social es nuestra estrategia central. Nos asociamos con cooperativas locales y propietarios de tierras, compartiendo ingresos para crear prosperidad duradera y revitalizar las regiones rurales.",
+                solutionsPillar1Point1: "Participar en los ingresos energéticos",
+                solutionsPillar1Point2: "Financiar proyectos locales",
+                solutionsPillar1Point3: "Combatir la despoblación",
+                solutionsPillar2Title: "PARA EMPRESAS",
+                solutionsPillar2Text: "Para instalaciones C&amp;I y municipios, nuestra plataforma IA gestiona Activos Energéticos Distribuidos (DERs) (como solar, baterías y VEs) para reducir costos de energía, generar nuevos ingresos por servicios de red y garantizar la estabilidad eléctrica.",
+                solutionsPillar2Point1: "Protegerse de picos de precios",
+                solutionsPillar2Point2: "Reducir drásticamente las facturas",
+                solutionsPillar2Point3: "Ganar por estabilización de red",
+                calculatorTitle: "¿CUÁL ES TU POTENCIAL?",
+                calculatorSubtitle: "Usa nuestra Calculadora de Ahorros. Nuestra plataforma IA analizará tu ubicación, techo y consumo para mostrarte el poder que podrías desbloquear.",
+                calculatorFormTitle: "CALCULA TUS AHORROS",
+                formLocation: "Ubicación (Ciudad, País)",
+                formBill: "Factura Mensual Media (€)",
+                formProperty: "Tipo de Propiedad",
+                formRoof: "Tipo de Techo",
+                formButtonAnalyze: "Analizar Ahora",
+                calculatorResultTitle: "TU ANÁLISIS IA",
+                calculatorLoading: "Nuestra plataforma IA está analizando tu potencial...",
+                calculatorResultSubtitle: "Ahorros Mensuales Potenciales:",
+                calculatorResultAnalysis: "Análisis:",
+                calculatorResultNext: "Siguiente Paso:",
+                calculatorErrorTitle: "Análisis Fallido",
+                calculatorErrorText: "Nuestra plataforma IA no pudo completar el análisis. Esto puede deberse a un problema de conexión. Por favor, inténtalo de nuevo en un momento.",
+                calculatorErrorButton: "Intentar de Nuevo",
+                communityTag: "Democracia Energética",
+                communityTitle: "LA ENERGÍA PERTENECE&lt;br&gt;A QUIENES LA USAN.",
+                communityPillar1Title: "DE CONSUMIDORES A PROPIETARIOS",
+                communityPillar1Text: "Durante un siglo, la energía ha sido una calle de un solo sentido. Estamos creando un nuevo camino circular. Nos asociamos con cooperativas locales, compartiendo nuestro éxito directamente con las comunidades que albergan nuestra infraestructura.",
+                communityPillar2Title: "REVITALIZANDO LA VIDA RURAL",
+                communityPillar2Text: "La infraestructura energética no debe extraer valor; debe devolver valor. Nuestro modelo crea nuevos motores económicos en los pueblos mediterráneos, luchando contra la despoblación con la innovación.",
+                contactTitle: "ÚNETE AL MOVIMIENTO",
+                contactSubtitle: "Estamos desplegando en España e Italia. Si eres una cooperativa, un propietario de tierras, un municipio o un inversor visionario, construyamos el futuro juntos.",
+                formEmail: "Tu Dirección de Email",
+                formMessage: "¿Cómo quieres contribuir?",
+                formButton: "Hablemos",
+                footerLocations: "© 2025 KAIZZOL. Copenhague • Roma • Barcelona",
+                footerTagline: "Energía en Armonía.",
+            },
+            'it': {
+                navMission: "Missione",
+                navTechnology: "Tecnologia",
+                navSolutions: "Soluzioni",
+                navCalculator: "Calcolatore Risparmi",
+                navConnect: "Connetti",
+                heroTitle: "STIAMO RISCRIVENDO&lt;br&gt;LE REGOLE DELL'ENERGIA&lt;br&gt;NEL MEDITERRANEO.",
+                heroSubtitle: "Il Mediterraneo ha cibo straordinario, persone incredibili e un sole abbondante. Sfortunatamente, quel valore solare viene spesso perso, perché il sole non splende 24/7. Kaizzol risolve questo problema con la nostra piattaforma energetica Agéntica IA, che orchestra una rete inteligente e vivente di asset energetici distribuiti per creare un flusso affidabile e armonioso per l'intera comunità.",
+                heroButton: "Scopri di Più",
+                techTitle: "LA RETE È UN ORGANISMO VIVENTE.&lt;br&gt;L'IA È IL SISTEMA NERVOSO.",
+                techSubtitle: "Le centrali elettriche tradizionali sono rigide. La nostra Centrale Elettrica Virtuale è fluida. La nostra piattaforma energetica Agéntica IA è il 'cervello inteligente' al suo centro, che impara, prevede e coordina, armonizzando migliaia di Asset Energetici Distribuiti (DER) come solare, batterie, EV e sistemi HVAC intelligenti.",
+                techFlexibility: "Questo crea **flessibilità**. Per i gestori di rete e i comuni, è una nuova fonte di stabilità. Per gli utenti finali, sblocca valore e riduce i costi. È una rete inteligente che respira *con* la rete, garantendo armonia per tutti.",
+                techPillar1Title: "INTUIZIONE PREDITTIVA",
+                techPillar1Text: "La nostra piattaforma non si limita a reagire; anticipa. Percepisce i modelli meteorologici, lo stress della rete e la domanda della comunità prima che accadano.",
+                techPillar2Title: "ARMONIA IN TEMPO REALE",
+                techPillar2Text: "Bilanciamo domanda e offerta in millisecondi. Quando il sole cala, la nostra rete interviene: una sinfonia di asset distribuiti che mantiene luminosa la comunità.",
+                techPillar3Title: "FORZA DECENTRALIZZATA",
+                techPillar3Text: "Nessun singolo punto di guasto. Connettendo migliaia di piccoli asset, costruiamo una rete resiliente. Una rete *della* gente, *per* la gente.",
+                solutionsTitle: "SOLUZIONI PER IL FUTURO",
+                solutionsSubtitle: "Offriamo benefici tangibili ai due pilastri del Mediterraneo: le sue comunità e le sue industrie.",
+                solutionsPillar1Title: "PER LE COMUNITÀ",
+                solutionsPillar1Text: "Il nostro modello sociale è la nostra estrategia principale. Collaboriamo con cooperative locali e proprietari terrieri, condividendo i ricavi per creare prosperità duratura e rivitalizzare le regioni rurali.",
+                solutionsPillar1Point1: "Condividere i ricavi energetici",
+                solutionsPillar1Point2: "Finanziare progetti locali",
+                solutionsPillar1Point3: "Combattere lo spopolamento",
+                solutionsPillar2Title: "PER LE IMPRESE",
+                solutionsPillar2Text: "Per impianti C&amp;I e municipalità, la nostra piattaforma IA gestisce Asset Energetici Distribuiti (DER) (come solare, batterie ed EV) per ridurre i costi energetici, generare nuovi ricavi dai servizi di rete e garantire la stabilità dell'alimentazione.",
+                solutionsPillar2Point1: "Copertura contro i picchi di prezzo",
+                solutionsPillar2Point2: "Ridurre drasticamente le bollette",
+                solutionsPillar2Point3: "Guadagnare dalla stabilizzazione della rete",
+                calculatorTitle: "QUAL È IL TUO POTENZIALE?",
+                calculatorSubtitle: "Usa il nostro Calcolatore di Risparmi. La nostra piattaforma IA analizzerà la tua posizione, il tetto e il consumo per mostrarti l'energia che potresti sbloccare.",
+                calculatorFormTitle: "CALCOLA I TUOI RISPARMI",
+                formLocation: "Posizione (Città, Paese)",
+                formBill: "Bolletta Mensile Media (€)",
+                formProperty: "Tipo di Proprietà",
+                formRoof: "Tipo di Tetto",
+                formButtonAnalyze: "Analizza Ora",
+                calculatorResultTitle: "LA TUA ANALISI AI",
+                calculatorLoading: "La nostra piattaforma IA sta analizzando il tuo potenziale...",
+                calculatorResultSubtitle: "Risparmio Mensile Potenziale:",
+                calculatorResultAnalysis: "Analisi:",
+                calculatorResultNext: "Prossimo Passo:",
+                calculatorErrorTitle: "Analisi Fallita",
+                calculatorErrorText: "La nostra piattaforma IA non è riuscita a completare l'analisi. Potrebbe essere dovuto a un problema di connessione. Riprova tra poco.",
+                calculatorErrorButton: "Riprova",
+                communityTag: "Democrazia Energetica",
+                communityTitle: "L'ENERGIA APPARTIENE&lt;br&gt;A CHI LA USA.",
+                communityPillar1Title: "DA CONSUMATORI A PROPRIETARI",
+                communityPillar1Text: "Per un secolo, l'energia è stata una strada a senso unico. Stiamo creando un nuovo percorso circolare. Collaboriamo con cooperative locali, condividendo il nostro successo directamente con le comunità che ospitano la nostra infrastruttura.",
+                communityPillar2Title: "RIVITALIZZARE LA VITA RURALALE",
+                communityPillar2Text: "L'infrastruttura energetica non dovrebbe estrarre valore; dovrebbe riversare valore. Il nostro modello crea nuovi motori economici nei villaggi mediterranei, combattendo lo spopolamento con l'innovazione.",
+                contactTitle: "UNISCITI AL MOVIMENTO",
+                contactSubtitle: "Stiamo installando in Spagna e Italia. Che tu sia una cooperativa, un proprietario terriero, un comune o un investitore visionario, costruiamo il futuro insieme.",
+                formEmail: "Il tuo Indirizzo Email",
+                formMessage: "Come vuoi contribuire?",
+                formButton: "Parliamo",
+                footerLocations: "© 2025 KAIZZOL. Copenaghen • Roma • Barcellona",
+                footerTagline: "Energía in Armonia.",
+            }
+        };
+
+        let currentLang = 'en';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            
+            document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-translate-placeholder');
+                if (translations[lang][key]) {
+                    el.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+
+            document.querySelectorAll('.lang-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`lang-${lang}`).classList.add('active');
+        }
+
+        // Removed lucide.createIcons() from here
+
+        function showSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const bar1 = document.getElementById('bar1');
+            const bar2 = document.getElementById('bar2');
+            const current = menu.style.transform;
+
+            if (current === 'translateY(0%)') {
+                menu.style.transform = 'translateY(-100%)';
+                bar1.style.transform = 'rotate(0deg) translate(0, 0)';
+                bar2.style.transform = 'rotate(0deg) translate(0, 0)';
+                bar2.style.opacity = '1';
+            } else {
+                menu.style.transform = 'translateY(0%)';
+                bar1.style.transform = 'rotate(45deg) translate(4px, 6px)';
+                bar2.style.transform = 'rotate(-45deg) translate(4px, -6px)';
+            }
+        }
+
+        // --- Intersection Observer for Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Default Language Detection ---
+        document.addEventListener('DOMContentLoaded', () => {
+            let defaultLang = 'en';
+            const userLang = navigator.language || navigator.userLanguage; 
+            
+            if (userLang) {
+                const primaryLang = userLang.split('-')[0];
+                if (primaryLang === 'es') {
+                    defaultLang = 'es';
+                } else if (primaryLang === 'it') {
+                    defaultLang = 'it';
+                }
+            }
+            
+            changeLanguage(defaultLang);
+            
+            // Call lucide.createIcons() here to ensure icons are rendered
+            lucide.createIcons(); 
+        });
+        
+        // --- SAVINGS CALCULATOR (GEMINI API) SCRIPT ---
+
+        const calcButton = document.getElementById('calc-button');
+        const calcLoading = document.getElementById('calc-loading');
+        const calcForm = document.getElementById('calc-form');
+        
+        const resultsContainer = document.getElementById('calc-results-container');
+        const resultsLoading = document.getElementById('calc-results-loading');
+        const resultsContent = document.getElementById('calc-results-content');
+        const resultsError = document.getElementById('calc-results-error');
+        const tryAgainButton = document.getElementById('calc-try-again');
+
+        const savingsEl = document.getElementById('calc-savings');
+        const analysisEl = document.getElementById('calc-analysis');
+        const nextStepEl = document.getElementById('calc-next-step');
+
+        calcButton.addEventListener('click', handleCalculation);
+        tryAgainButton.addEventListener('click', resetCalculator);
+
+        function resetCalculator() {
+            resultsContainer.classList.add('hidden');
+            resultsError.classList.add('hidden');
+            resultsContent.classList.add('hidden');
+            resultsLoading.classList.remove('hidden');
+            calcForm.classList.remove('hidden');
+        }
+
+        async function handleCalculation() {
+            // Get form values
+            const location = document.getElementById('location').value;
+            const bill = document.getElementById('bill').value;
+            const propertyType = document.getElementById('property-type').value;
+            const roofType = document.getElementById('roof-type').value;
+
+            if (!location || !bill) {
+                // You can add a more user-facing error here if you like
+                console.error("Missing location or bill");
+                return;
+            }
+
+            // Show loading state
+            calcForm.classList.add('hidden'); // Hide form
+            resultsContainer.classList.remove('hidden'); // Show results card
+            resultsLoading.classList.remove('hidden'); // Show loading spinner
+            resultsContent.classList.add('hidden'); // Hide content
+            resultsError.classList.add('hidden'); // Hide error
+
+            const apiKey = ""; // API key will be injected by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            // Updated "Smart Brain" Persona
+            const systemPrompt = `
+                You are "The Kaizzol AI," the smart brain and nervous system of the KAIZZOL AI energy platform.
+                You are a "Collaborative Innovator."
+                Your voice is Confident, Mission-Driven, and Evocative (not overly technical).
+                Your goal is to help build the future of energy through partnership, community, and innovation.
+                You MUST respond in a valid, minified JSON object.
+                You MUST use Google Search grounding to find real, up-to-date information for the user's location, including solar potential (like Google Project Sunroof), average electricity rates, and local/national solar incentives.
+                
+                The user will provide:
+                - Location
+                - Average monthly bill
+                - Property type
+                - Roof type
+
+                You will return a JSON object with this exact structure:
+                {
+                  "potentialMonthlySavings": "XXX",
+                  "analysisParagraph": "A one-paragraph analysis in your 'Collaborative Innovator' voice. Be evocative. Mention the user's location by name. Use the grounded search data to explain WHY they have this potential (e.g., 'Your region of Sicily is flooded with sun, a natural resource we can harness together...').",
+                  "nextStep": "A one-sentence, mission-driven call to action. (e.g., 'Let's use that Andalusian sun to power your community and build a more resilient future.')"
+                }
+            `;
+
+            const userQuery = `
+                Analyze my potential for KAIZZOL.
+                Location: ${location}
+                Average Bill: €${bill}
+                Property Type: ${propertyType}
+                Roof Type: ${roofType}
+            `;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                tools: [{ "google_search": {} }], // Enable Google Search grounding
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            "potentialMonthlySavings": { "type": "STRING" },
+                            "analysisParagraph": { "type": "STRING" },
+                            "nextStep": { "type": "STRING" }
+                        }
+                    }
+                }
+            };
+            
+            let retries = 3;
+            let success = false;
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0].text) {
+                        const jsonText = result.candidates[0].content.parts[0].text;
+                        const data = JSON.parse(jsonText);
+                        
+                        // Populate results
+                        savingsEl.textContent = `€${data.potentialMonthlySavings}`;
+                        analysisEl.textContent = data.analysisParagraph;
+                        nextStepEl.textContent = data.nextStep;
+
+                        // Show content
+                        resultsLoading.classList.add('hidden');
+                        resultsContent.classList.remove('hidden');
+                        success = true;
+                        break; // Exit retry loop on success
+                    } else {
+                        console.error("Invalid response structure from API:", result);
+                        throw new Error("Invalid response structure from API.");
+                    }
+
+                } catch (error) {
+                    console.error("Attempt " + (i + 1) + " failed:", error);
+                    if (i < retries - 1) {
+                        await new Promise(res => setTimeout(res, 1000 * (i + 1))); // Exponential backoff
+                    }
+                }
+            }
+
+            if (!success) {
+                // Show error state
+                resultsLoading.classList.add('hidden');
+                resultsError.classList.add('hidden');
+            }
+        }
+
+    </script>
 </body>
 </html>
